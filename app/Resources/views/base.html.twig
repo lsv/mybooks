@@ -2,20 +2,28 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Mit bibliotek{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
             <style>
                 header { border-bottom: 1px solid #ebebeb; }
-                header > h1 {text-align: center}
+                header h1 {text-align: center}
             </style>
             {% block styles %}{% endblock %}
         {% endblock %}
     </head>
     <body>
+
         <div class="container">
-            <header>
-                <h1>Mit bibliotek</h1>
+            <header class="row">
+                <h1>
+                    Mit bibliotek
+                    {% block logout %}
+                    <span class="pull-right">
+                        <a href="{{ path('login_logout') }}">Logout</a>
+                    </span>
+                    {% endblock %}
+                </h1>
             </header>
             {% block body %}{% endblock %}
         </div>
@@ -24,4 +32,5 @@
             {% endblock %}
         {% endblock %}
     </body>
+
 </html>

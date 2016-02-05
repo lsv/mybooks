@@ -34,15 +34,15 @@ class LoginController extends Controller
             'label' => 'Login'
         ]);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $password = $form->getData()['login'];
-            if ($password == $this->getParameter('admin_login')) {
+            if ($password === $this->getParameter('admin_login')) {
                 $this->get('session')->set(self::SESSION_ADMIN_USER, true);
                 $this->get('session')->set(self::SESSION_LOGIN_USER, true);
-                return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('admin_index');
             }
 
-            if ($password == $this->getParameter('user_login')) {
+            if ($password === $this->getParameter('user_login')) {
                 $this->get('session')->set(self::SESSION_LOGIN_USER, true);
                 return $this->redirectToRoute('homepage');
             }
@@ -53,6 +53,23 @@ class LoginController extends Controller
         return $this->render('::login.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="login_logout")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function logoutAction()
+    {
+        if ($this->get('session')->has(self::SESSION_ADMIN_USER)) {
+            $this->get('session')->remove(self::SESSION_ADMIN_USER);
+        }
+
+        if ($this->get('session')->has(self::SESSION_LOGIN_USER)) {
+            $this->get('session')->remove(self::SESSION_LOGIN_USER);
+        }
+
+        return $this->redirectToRoute('login_index');
     }
 
 }
