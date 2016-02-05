@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+
+    <div class="books" style="margin-top:20px;">
+        {% for book in books.books %}
+            <div class="col-md-6">
+                <div class="well">
+                    {% include '::booklist.html.twig' with {book: book} %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

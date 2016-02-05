@@ -1,0 +1,10 @@
+services:
+  app.service.book:
+    class: AppBundle\Service\BooksService
+    arguments: ["%kernel.logs_dir%/../data"]
+
+  app.twig:
+    class: AppBundle\Twig\AppTwig
+    arguments: ["@app.service.book"]
+    tags:
+      - { name: twig.extension }
