@@ -23,10 +23,6 @@ class AdminController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if (! $this->get('session')->has(LoginController::SESSION_ADMIN_USER)) {
-            return $this->redirectToRoute('login_index');
-        }
-
         $form = $this->createForm(BookType::class, null, [
             'method' => 'post'
         ]);
@@ -44,7 +40,6 @@ class AdminController extends Controller
             'deleteable' => true,
             'form' => $form->createView()
         ]);
-
     }
 
     /**
@@ -54,10 +49,6 @@ class AdminController extends Controller
      */
     public function deleteAction($uniqid)
     {
-        if (! $this->get('session')->has(LoginController::SESSION_ADMIN_USER)) {
-            return $this->redirectToRoute('login_index');
-        }
-
         $this->get('app.service.book')->deleteBook($uniqid);
         return $this->redirectToRoute('admin_index');
     }

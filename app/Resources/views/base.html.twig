@@ -20,7 +20,7 @@
                     Mit bibliotek
                     {% block logout %}
                     <span class="pull-right">
-                        <a href="{{ path('login_logout') }}">Logout</a>
+                        <a href="{{ path('logout') }}">Logout</a>{% if is_granted('ROLE_ADMIN') %} | <a href="{{ path('admin_index') }}">Admin</a>{% endif %}
                     </span>
                     {% endblock %}
                 </h1>

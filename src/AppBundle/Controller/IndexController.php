@@ -19,10 +19,6 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        if (! $this->get('session')->has(LoginController::SESSION_LOGIN_USER)) {
-            return $this->redirectToRoute('login_index');
-        }
-
         $books = $this->get('app.service.book')->getBooks();
         return $this->render('::index.html.twig', [
             'books' => $books,
