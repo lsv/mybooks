@@ -6,7 +6,22 @@
         <div class="col-md-6">
             <h3>Book list</h3>
             {% for book in books.books %}
-                {% include '::booklist.html.twig' with {book: book} %}
+                <div class="media">
+                    <div class="media-left">
+                        <img class="media-object" src="{{ book | image | default('/img/no-cover.jpg')}}" alt="{{ book.name }}">
+                    </div>
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2 class="media-heading">{{ book.name }}</h2>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <a class="btn btn-sm btn-danger" href="{{ path('admin_delete', {uniqid: book.uniqid}) }}">Delete</a>
+                            </div>
+                        </div>
+                        <p>{{ book | description }}</p>
+                    </div>
+                </div>
                 {% if not loop.last %}<hr>{% endif %}
             {% endfor %}
         </div>

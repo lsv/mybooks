@@ -32,10 +32,10 @@ class AppTwig extends \Twig_Extension
         return str_split($text, $pos)[0];
     }
 
-    public function getImage(Book $book, $width = 100)
+    public function getImage(Book $book, $height = 100)
     {
         $src = $this->service->getImage($book);
-        return str_replace('&width=210', '&width=' . $width, $src);
+        return str_replace('&width=210', '&height=' . $height, $src);
     }
 
     public function getName()
