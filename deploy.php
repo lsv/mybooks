@@ -30,14 +30,14 @@ task('deploy', [
 
 set('repository', 'git@github.com:lsv/mybooks.git');
 
-server('prod', 'home.aarhof.eu', 22)
+server('prod', 'newserver.aarhof.eu', 22)
     ->user('root')
     ->forwardAgent()
     ->stage('production')
     ->env('deploy_path', '/var/www/books.aarhof.eu/prod')
 ;
 
-server('dev', 'home.aarhof.eu', 22)
+server('dev', 'newserver.aarhof.eu', 22)
     ->user('root')
     ->forwardAgent()
     ->stage('development')
