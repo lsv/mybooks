@@ -29,13 +29,16 @@ class AppTwig extends \Twig_Extension
     {
         $text = $this->service->getDescription($book);
         $pos = strpos($text, '...');
-        return str_split($text, $pos)[0];
+        if ($pos) {
+            return str_split($text, $pos)[0];
+        }
+
+        return $text;
     }
 
-    public function getImage(Book $book, $height = 100)
+    public function getImage(Book $book)
     {
-        $src = $this->service->getImage($book);
-        return str_replace('&width=210', '&height=' . $height, $src);
+        return $this->service->getImage($book);
     }
 
     public function getName()

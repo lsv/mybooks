@@ -2,16 +2,16 @@
 
 {% block body %}
 
-    <div id="books">
+    <div id="books" class="card-columns">
         {% for book in books.books %}
-            <div class="item">
+            <div class="card">
                 <div class="overlay" style="display: none">
                     <a href="{{ book.downloadUrl }}" class="btn btn-primary">Download</a>
                     <p>{{ book | description }}</p>
                 </div>
-                <div class="item-inner">
-                    <img src="{{ book | image(250) | default('/img/no-cover.jpg')}}" alt="{{ book.name }}">
-                    <h4>{{ book.name }}</h4>
+                <img src="{{ book | image() | default('/img/no-cover.jpg')}}" alt="{{ book.name }}" style="max-width:210px;max-height:200px;">
+                <div class="card-block">
+                    <h4 class="card-title">{{ book.name }}</h4>
                 </div>
             </div>
         {% endfor %}
@@ -21,19 +21,11 @@
 
 {% block scripts %}
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/packery/1.4.3/packery.pkgd.min.js"></script>
     <script>
-        $('.item').on('mouseover', function() {
+        $('.card').on('mouseover', function() {
             $(this).find('.overlay').show();
         }).on('mouseout', function() {
             $(this).find('.overlay').hide();
-        });
-
-        var container = document.querySelector('#books');
-        var pckry = new Packery( container, {
-            // options
-            itemSelector: '.item',
-            gutter: 20
         });
     </script>
 {% endblock %}
